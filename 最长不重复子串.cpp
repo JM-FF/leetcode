@@ -27,3 +27,28 @@ public:
 		return maxlen;
 	}
 };
+
+
+
+//双指针
+class Solution {
+public:
+	int lengthOfLongestSubstring(string s) {
+		unordered_set<char> tmp;
+		int maxlen = 0;
+		int right = 0;
+		for (int i = 0;i < s.size();i++)
+		{
+			while (right < s.size() && !tmp.count(s[right]))
+			{
+				tmp.insert(s[right]);
+				right++;
+			}
+			maxlen = max(maxlen, right - i);
+			if (right == s.size())
+				break;
+			tmp.erase(s[i]);
+		}
+		return maxlen;
+	}
+};
